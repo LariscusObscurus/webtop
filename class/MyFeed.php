@@ -65,13 +65,34 @@ class MyFeed
 		$newXML = new SimpleXMLElement("<feed></feed>");
 		$newXML->addAttribute('xmlns', 'http://www.w3.org/2005/Atom');
 		$header = $newsXML->addChild('title', 'webtop');
-		$header->addChild('subtitle', 'webtop');
-
+		$header->addChild('updated', date3339());
+		$header->addChild('id','tag:webtop,2013:http://www.lorien.chickenkiller.com/pages/atoms.php');
+		while ($row = mysql_fetch_assoc($rssentr)) {
+			$entry = $header->addChild('entry');
+			$entry->addChild('title', $row['title']);
+			$entry->addChild('link', $row['link']);
+			$entry->addChild('summary', $row['description']);
+		}
+		Header('Content-type: text/xml');
 		echo $newXML->asXML();
 
-		while ($row = mysql_fetch_assoc($rssentr)) {
-			
-		}
+	}
+
+	private function date3339($timestamp=0) {
+
+	if (!$timestamp) {
+		$timestamp = time();
+	}
+	$date = date('Y-m-d\TH:i:s', $timestamp);
+
+	$matches = array();
+	if (preg_match('/^([\-+])(\d{2})(\d{2})$/', date('O', $timestamp), $matches)) {
+		$date .= $matches[1].$matches[2].':'.$matches[3];
+	} else {
+		$date .= 'Z';
+	}
+	return $date;
+ 
 	}
 }
 ?>
