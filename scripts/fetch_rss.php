@@ -15,7 +15,7 @@
 			$count = count($title);
 			$data = $db->getData();
 			
-			if ($option == 2) {
+			if ($data && $option == 2) {
 				$i = 0;
 				$count = count($titles);
 				while ($row = mysql_fetch_assoc($data) && $i < $count) {
@@ -30,7 +30,7 @@
 					$i++;
 				}
 				echo "success";
-			} else if ($option == 1 || $option == 3) {
+			} else if ($data && ($option == 1 || $option == 3)) {
 				for ($i = 0; $i < $count; $i++) {
 					switch ($option) {
 					case 1:
@@ -49,7 +49,7 @@
 				}
 				echo "success";
 			} else {
-				echo "error: wrong option";
+				echo "error: wrong option or no data found";
 			}
 		} else {
 			echo "error: not an atom feed";
