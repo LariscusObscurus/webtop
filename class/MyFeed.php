@@ -13,7 +13,7 @@ class MyFeed
 		if(!strcmp($this->myXML->feed['xmlns'],
 			'http://www.w3.org/2005/Atom')) 
 		{
-			return -1;
+			return false;
 		}
 		foreach($this->myXML->entry as $entry) {
 			$this->titles[$i] = $entry->title;
@@ -57,7 +57,21 @@ class MyFeed
 	{
 		require("dbHandler.php");
 		$db = new DbHandler();
-		$db->getData();
+		$rssentr = $db->getData(10);
+		if(!$rssentr) {
+			return 0;
+		}
+
+		$newXML = new SimpleXMLElement("<feed></feed>");
+		$newXML->addAttribute('xmlns', 'http://www.w3.org/2005/Atom');
+		$header = $newsXML->addChild('title', 'webtop');
+		$header->addChild('subtitle', 'webtop');
+
+		echo $newXML->asXML();
+
+		while ($row = mysql_fetch_assoc($rssentr)) {
+			
+		}
 	}
 }
 ?>
