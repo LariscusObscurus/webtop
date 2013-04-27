@@ -10,11 +10,12 @@ class MyFeed
 	{
 		$i = 0;
 		$this->myXML = smplexml_load_file($rssAtom);
-		foreach($this->myXML as $entry){
-		$this->titles[$i] = $entry->title;
-		$this->links[$i] = $entry->link['href'];
-		$this->descriptions[$i] = $entry->summary;
-		$i++;
+		foreach($this->myXML as $entry) {
+			$this->titles[$i] = $entry->title;
+			$this->links[$i] = $entry->link['href'];
+			$this->descriptions[$i] = $entry->summary;
+			$i++;
+		}
 	}
 
 	public function getTitles($i) 
@@ -47,6 +48,11 @@ class MyFeed
 		$this->descriptions[$i] = $desc;
 	}
 
-
+	public function createRss()
+	{
+		require("dbHandler.php");
+		$db = new DbHandler();
+		$db->getData
+	}
 }
 ?>
