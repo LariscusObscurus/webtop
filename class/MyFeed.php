@@ -9,8 +9,13 @@ class MyFeed
 	public function parse($rssAtom)
 	{
 		$i = 0;
-		$this->myXML = smplexml_load_file($rssAtom);
-		foreach($this->myXML as $entry) {
+		$this->myXML = simplexml_load_file($rssAtom);
+		if(!strcmp($this->myXML->feed['xmlns'],
+			'http://www.w3.org/2005/Atom')) 
+		{
+			return -1;
+		}
+		foreach($this->myXML->entry as $entry) {
 			$this->titles[$i] = $entry->title;
 			$this->links[$i] = $entry->link['href'];
 			$this->descriptions[$i] = $entry->summary;
@@ -18,19 +23,19 @@ class MyFeed
 		}
 	}
 
-	public function getTitles($i) 
+	public function getTitles() 
 	{
-		return $this->titles[$i];
+		return $this->titles;
 	}
 	
-	public function getLinks($i)
+	public function getLinks()
 	{
-		return $this->links[$i];
+		return $this->links];
 	}
 
-	public function getDesc($i)
+	public function getDesc()
 	{
-		return $this->descriptions[$i];
+		return $this->descriptions;
 	}
 
 	public function setTitles($title, $i) 
@@ -52,7 +57,7 @@ class MyFeed
 	{
 		require("dbHandler.php");
 		$db = new DbHandler();
-		$db->getData
+		$db->getData();
 	}
 }
 ?>
