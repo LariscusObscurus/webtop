@@ -1,10 +1,10 @@
 <?php
 class MyFeed
 {
-	var $myXML;
-	var $titles;
-	var $links;
-	var $descriptions;
+	private $myXML;
+	private $titles;
+	private $links;
+	private $descriptions;
 
 	public function parse($rssAtom)
 	{
