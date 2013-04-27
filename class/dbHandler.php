@@ -21,16 +21,20 @@ class DbHandler
 	{
 		switch ($option) {
 		case 1:
-			$result = mysql_query("SELECT * FROM rss ORDER BY title ASC;");
+			$result = mysql_query("SELECT * FROM rss ORDER BY title ASC;",
+				$this->connection);
 			break;
 		case 2:
-			$result = mysql_query("SELECT * FROM rss ORDER BY title DESC;");
+			$result = mysql_query("SELECT * FROM rss ORDER BY title DESC;",
+				$this->connection);
 			break;
 		case 3:
-			$result = mysql_query("SELECT * FROM rss ORDER BY date ASC;");
+			$result = mysql_query("SELECT * FROM rss ORDER BY date ASC;",
+				$this->connection);
 			break;
 		case 4:
-			$result = mysql_query("SELECT * FROM rss ORDER BY date DESC;");
+			$result = mysql_query("SELECT * FROM rss ORDER BY date DESC;",
+				$this->connection);
 			break;
 		}
 		if (!$result || mysql_num_rows($result) <= 0) {
