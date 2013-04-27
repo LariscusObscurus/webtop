@@ -30,7 +30,7 @@ class MyFeed
 	
 	public function getLinks()
 	{
-		return $this->links];
+		return $this->links;
 	}
 
 	public function getDesc()
