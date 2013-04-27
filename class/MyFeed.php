@@ -21,6 +21,7 @@ class MyFeed
 			$this->descriptions[$i] = $entry->summary;
 			$i++;
 		}
+		return true;
 	}
 
 	public function getTitles() 
