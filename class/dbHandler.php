@@ -17,9 +17,26 @@ class DbHandler
 		mysql_close($this->connection);
 	}
 	
-	function getData()
+	function getData($option)
 	{
-		return null;
+		switch ($option) {
+		case 1:
+			$result = mysql_query("SELECT * FROM rss ORDER BY title ASC;");
+			break;
+		case 2:
+			$result = mysql_query("SELECT * FROM rss ORDER BY title DESC;");
+			break;
+		case 3:
+			$result = mysql_query("SELECT * FROM rss ORDER BY date ASC;");
+			break;
+		case 4:
+			$result = mysql_query("SELECT * FROM rss ORDER BY date DESC;");
+			break;
+		}
+		if (!$result || mysql_num_rows($result) <= 0) {
+			return null;
+		}
+		return mysql_fetch_assoc($result);
 	}
 	
 	function addEntry($title, $link, $description)
