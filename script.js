@@ -500,9 +500,13 @@ function onClickRssSend (event) {
 			cache: false,
 			contentType: false,
 			processData: false,
-			success: deletionComplete
+			success: rssComplete
 		});
 	}
+}
+
+function rssComplete (response, error) {
+	console.log(response);
 }
 
 function setCookie (name, value, exdays) {
