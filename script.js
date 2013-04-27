@@ -108,13 +108,22 @@ $(document).ready(function (event) {
 });
 
 function windowEvents (id) {
-	$(id).mousedown(function (event) {
-		$('#menu').hide();
-	});
 	$(id).mouseup(function (event) {
 		var formdata = new FormData();
 		formdata.append("x_{0}".format(id.substr(1, id.length-1)), $(id).offset().left);
 		formdata.append("y_{0}".format(id.substr(1, id.length-1)), $(id).offset().top);
+		sendHandling(formdata);
+	});
+}
+
+function windowCloseEvents (id, closeId) {
+	$(closeId).click(function (event) {
+		noopHandler(event);
+		$(id).hide();
+		$(id).css("z-index", "0");
+		$('#menu').hide();
+		var formdata = new FormData();
+		formdata.append(id.substr(1, id.length), "close");
 		sendHandling(formdata);
 	});
 }
@@ -145,18 +154,6 @@ function windowRssZ () {
 	$("#windowInfo").css("z-index", "1");
 	$("#windowAccount").css("z-index", "1");
 	$("#windowPhoto").css("z-index", "1");
-}
-
-function windowCloseEvents (id, closeId) {
-	$(closeId).click(function (event) {
-		noopHandler(event);
-		$(id).hide();
-		$(id).css("z-index", "0");
-		$('#menu').hide();
-		var formdata = new FormData();
-		formdata.append(id.substr(1, id.length), "close");
-		sendHandling(formdata);
-	});
 }
 
 function sendHandling (formdata) {
@@ -484,9 +481,13 @@ function logout () {
 	setCookie("play", "", -1);
 }
 
+function onClickRssText (event) {
+	$(event.target).focus();
+}
+
 function onClickRssSend (event) {
 	noopHandler(event);
-	var content = $("#rssLink").attr("value");
+	var content = $("#rssLink").text();
 	
 	if (content && content.length > 0) {
 		var formdata = new FormData();
@@ -496,7 +497,7 @@ function onClickRssSend (event) {
 		$.ajax({
 			type: "POST",
 			data: formdata,
-			url: "scripts/delete.php",
+			url: "scripts/fetch_rss.php",
 			cache: false,
 			contentType: false,
 			processData: false,
