@@ -6,10 +6,10 @@ class DbHandler
 	public function __construct()
 	{
 		$this->connection = mysql_connect("localhost", "apache", "fingolfin");
-		if(!$connection) {
+		if(!$this->connection) {
 			die('MySQL Fehler: '. mysql_error());
 		}
-		mysql_select_db("webtop", $con);
+		mysql_select_db("webtop", $this->connection);
 	}
 	
 	public function __destruct()
