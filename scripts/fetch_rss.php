@@ -27,7 +27,7 @@
 						$links[$i],
 						$descriptions[$i]
 					);
-					$i++
+					$i++;
 				}
 				echo "success";
 			} else if ($option == 1 || $option == 3) {
