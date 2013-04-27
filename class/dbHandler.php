@@ -17,11 +17,16 @@ class DbHandler
 		mysql_close($this->connection);
 	}
 	
-	function getData($option, $limit = 10)
+	function getData(/*$option, */$limit = 10)
 	{
 		if ($limit <= 0) {
 			return null;
 		}
+		$result = mysql_query("SELECT * FROM rss 
+			ORDER BY date ASC
+			LIMIT $limit;",
+			$this->connection);
+		/*
 		switch ($option) {
 		case 1:
 			$result = mysql_query("SELECT * FROM rss 
@@ -38,10 +43,11 @@ class DbHandler
 		default:
 			return null;
 		}
+		*/
 		if (!$result || mysql_num_rows($result) <= 0) {
 			return null;
 		}
-		return mysql_fetch_assoc($result);
+		return $result;
 	}
 	
 	function addEntry($title, $link, $description)

@@ -491,6 +491,8 @@ function onClickRssSend (event) {
 	if (content && content.length > 0) {
 		var formdata = new FormData();
 		formdata.append("link", content);
+		// TODO: add radio buttons for option
+		formdata.append("option", 1);
 		$.ajax({
 			type: "POST",
 			data: formdata,
