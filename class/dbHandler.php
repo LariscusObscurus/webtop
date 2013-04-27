@@ -25,28 +25,18 @@ class DbHandler
 		switch ($option) {
 		case 1:
 			$result = mysql_query("SELECT * FROM rss 
-				ORDER BY title ASC 
+				ORDER BY date ASC
 				LIMIT $limit;",
 				$this->connection);
 			break;
 		case 2:
 			$result = mysql_query("SELECT * FROM rss 
-				ORDER BY title DESC 
-				LIMIT $limit;",
-				$this->connection);
-			break;
-		case 3:
-			$result = mysql_query("SELECT * FROM rss 
-				ORDER BY date ASC
-				LIMIT $limit;",
-				$this->connection);
-			break;
-		case 4:
-			$result = mysql_query("SELECT * FROM rss 
 				ORDER BY date DESC;
 				LIMIT $limit",
 				$this->connection);
 			break;
+		default:
+			return null;
 		}
 		if (!$result || mysql_num_rows($result) <= 0) {
 			return null;
