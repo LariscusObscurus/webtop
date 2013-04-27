@@ -13,7 +13,7 @@
 			$links = $feed->getLinks();
 			$descriptions = $feed->getDesc();
 			$count = count($title);
-			$data = db->getData();
+			$data = $db->getData();
 			
 			if ($option == 2) {
 				$i = 0;

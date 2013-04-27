@@ -487,7 +487,7 @@ function onClickRssText (event) {
 
 function onClickRssSend (event) {
 	noopHandler(event);
-	var content = $("#rssLink").text();
+	var content = $("#rssLink").attr("value");
 	
 	if (content && content.length > 0) {
 		var formdata = new FormData();
