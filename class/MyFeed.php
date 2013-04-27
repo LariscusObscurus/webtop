@@ -64,8 +64,8 @@ class MyFeed
 
 		$newXML = new SimpleXMLElement("<feed></feed>");
 		$newXML->addAttribute('xmlns', 'http://www.w3.org/2005/Atom');
-		$header = $newsXML->addChild('title', 'webtop');
-		$header->addChild('updated', date3339());
+		$header = $newXML->addChild('title', 'webtop');
+		$header->addChild('updated', $this->date3339());
 		$header->addChild('id','tag:webtop,2013:http://www.lorien.chickenkiller.com/pages/atoms.php');
 		while ($row = mysql_fetch_assoc($rssentr)) {
 			$entry = $header->addChild('entry');
@@ -73,7 +73,6 @@ class MyFeed
 			$entry->addChild('link', $row['link']);
 			$entry->addChild('summary', $row['description']);
 		}
-		Header('Content-type: text/xml');
 		echo $newXML->asXML();
 
 	}
