@@ -3,7 +3,7 @@ class DbHandler
 {
 	private $connection;
 	
-	function __construct()
+	public function __construct()
 	{
 		$this->connection = mysql_connect("localhost", "apache", "fingolfin");
 		if(!$connection) {
@@ -12,12 +12,12 @@ class DbHandler
 		mysql_select_db("webtop", $con);
 	}
 	
-	function __destruct()
+	public function __destruct()
 	{
 		mysql_close($this->connection);
 	}
 	
-	function getData(/*$option, */$limit = 10)
+	public function getData(/*$option, */$limit = 10)
 	{
 		if ($limit <= 0) {
 			return null;
@@ -50,7 +50,7 @@ class DbHandler
 		return $result;
 	}
 	
-	function addEntry($title, $link, $description)
+	public function addEntry($title, $link, $description)
 	{
 		$result = mysql_query("INSERT INTO rss (title, link, description, date) 
 			VALUES ('$title', '$link', '$description', NOW())", 
@@ -58,7 +58,7 @@ class DbHandler
 		return $result;
 	}
 	
-	function changeEntry($oldTitle, $oldLink, $oldDescription, 
+	public function changeEntry($oldTitle, $oldLink, $oldDescription, 
 		$newTitle, $newLink, $newDescription)
 	{
 		$result = mysql_query("UPDATE rss SET 
@@ -73,7 +73,7 @@ class DbHandler
 		return $result;
 	}
 	
-	function deleteEntry($title, $link, $description)
+	public function deleteEntry($title, $link, $description)
 	{
 		$result = mysql_query("DELETE FROM rss WHERE 
 			title = '$title' AND 
