@@ -1,0 +1,290 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+html {
+	height: 100%;
+}
+body {
+	background: url("img/bg.jpg") no-repeat left top #FFFFFF;
+	color: #000000;
+	background-size: 100%;
+	font-family: Arial;
+	font-size: 12px;
+	color: #000000;
+	height: 100%;
+}
+a {
+	display: block;
+	text-decoration: none;
+	color: #000000;
+}
+#content {
+	overflow: hidden;
+	height: 100%;
+}
+#login {
+	margin: 125px auto;
+	background: url("img/login.png") no-repeat center top #FFFFFF;
+	width: 416px;
+	height: 260px;
+	border-radius: 7px 7px 0 0;
+}
+#login form {
+	padding: 142px 0 0 87px;
+}
+#login input[type="text"], #login input[type="password"] {
+	display: block;
+	border: none;
+	margin-bottom: 9px;
+	height: 18px;
+	width: 233px;
+	padding: 0 4px;
+}
+#login input[type="submit"], #login input[type="button"] {
+	width: 241px;
+	border: 1px solid #888888;
+	padding: 2px 0;
+}
+#login input[type="submit"]:active, #login input[type="button"]:active {
+	background-color: #ddd;
+}
+#bar {
+	background: url("img/bar.jpg") repeat-x left top #FFFFFF;
+	background-color: red;
+	height: 29px;
+	width: 100%;
+	position: absolute;
+	bottom: 0px;
+	z-index: 3;
+}
+#time {
+	float: right;
+	color: #ffffff;
+	font-family: serif;
+	font-size: 13px;
+	padding: 10px 20px 5px 64px;
+	background: url("img/shot.png") right top;
+	border-left: 1px solid #272727;
+}
+#start {
+	background: url("img/start.png") no-repeat left top transparent;
+	height: 29px;
+	width: 97px;
+	float: left;
+}
+#programs {
+	height: 478px;
+	width: 380px;
+	background: url("img/menu.gif") no-repeat;
+	position: absolute;
+	bottom: 29px;
+	left: 0px;
+	display: none;
+	z-index: 3;
+}
+#programTable td {
+	padding: 0 8px;
+}
+#programTable a:hover {
+	font-weight: bold;
+}
+#username {
+	color: #ffffff;
+	font-size: 18px;
+	font-weight: bold;
+	padding: 23px 20px 0 75px;
+}
+#arbeitsplatz, #internetexplorer, #papierkorb, #accountAppProg, #photoAppProg, #rssAppProg {
+	margin-left: 10px;
+	padding: 20px 20px 20px 55px;
+	font-size: 13px;
+	position: relative;
+	top: 30px
+}
+#arbeitsplatz {
+	background: url("img/pc.png") no-repeat transparent;
+	background-size: 45px 45px;
+}
+#internetexplorer {
+	background: url("img/ie.png") no-repeat transparent;
+	background-size: 45px 45px;
+}
+#papierkorb {
+	background: url("img/trash.png") no-repeat transparent;
+	background-size: 45px 45px;
+}
+#accountAppProg {
+	background: url("img/account.png") no-repeat transparent;
+	background-size: 45px 45px;
+}
+#photoAppProg {
+	background: url("img/photo.png") no-repeat transparent;
+	background-size: 45px 45px;
+}
+#rssAppProg {
+	background: url("img/rss.png") no-repeat transparent;
+	background-size: 45px 45px;
+}
+#logout {
+	bottom: 2px;
+	height: 35px;
+	position: absolute;
+	right: 134px;
+	width: 80px;
+	border-radius: 3px;
+	opacity: .0;
+}
+#logout:active {
+	background: rgba(0, 0, 0, 0.2);
+	border: 1px solid #444444;
+	opacity: .1;
+}
+.logoutLink {
+	width: 80px;
+	height: 35px;
+}
+#error {
+	text-align: center;
+	color: red;
+	padding-top: 10px;
+}
+.icon {
+	display: block;
+	width: 64px;
+	height: 64px;
+	width: 64px;
+	background: red;
+	cursor: pointer;
+	position: absolute;
+}
+#register input[type="text"], #register input[type="password"] {
+	display: block;
+	border: 1px solid #444;
+	margin-bottom: 9px;
+	height: 18px;
+	width: 233px;
+	padding: 0 4px;
+}
+#register input[type="submit"], #register input[type="button"] {
+	width: 241px;
+	border: 1px solid #888888;
+	padding: 2px 0;
+}
+#register {
+	border: 1px solid #aaa;
+	background-color: #ccc;
+	width: 610px;
+	height: 495px;
+}
+#windowInfo, #windowAccount, #windowPhoto, #windowRegister, #windowRss {
+	height: 300px;
+	width: 640px;
+	position: absolute;
+	left: 300px;
+	top: 65px;
+	z-index: 9000;
+}
+.windowBar {
+	background-color: #3838fa;
+	border-radius: 4px 4px 0 0;
+}
+.windowContent, #registerContent {
+	background: #ffffff;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	height: 500px;
+	padding: 5px;
+}
+.close {
+	color: #cccccc;
+	float: right;
+	display: block;
+	padding: 5px 10px 5px 15px;
+	cursor: pointer;
+}
+.close:hover {
+	color: #ffffff;
+}
+#icon_1 {
+	background: url("img/pc.png") no-repeat center center transparent;
+}
+#icon_2 {
+	background: url("img/ie.png") no-repeat center center transparent;
+}
+#icon_3 {
+	background: url("img/trash.png") no-repeat center center transparent;
+}
+#icon_4 {
+	background: url("img/account.png") no-repeat center center transparent;
+}
+#icon_5 {
+	background: url("img/photo.png") no-repeat center center transparent;
+}
+#icon_6 {
+	background: url("img/rss.png") no-repeat center center transparent;
+}
+#dropArea {
+    height: 250px;
+    width: 250px;
+    background-color: #aaaaaa;
+    border-radius: 5px;
+    text-align: center;
+    padding: 85px 0;
+    margin: 10px;
+    float: left;
+}
+#photos {
+	height: 420px;
+	width: 340px;
+	float: right;
+	margin-top: 10px;
+	overflow-y: scroll;
+}
+#photos li {
+	list-style-type: none;
+	float: left;
+}
+.photo {
+	height: 64px;
+	width: 64px;
+	float: left;
+	margin: 5px;
+}
+.photoTag {
+	font-size: 9px;
+	text-align: center;
+	margin-bottom: 10px;
+}
+.content {
+	position: absolute;
+	top: 32px;
+	left: 8px;
+}
+#infoContent, #accountContent, #photoContent, #rssContent {
+	position: relative;
+}
+#menu {
+	display: none;
+	position: absolute;
+	padding: 10px;
+	background-color: #ddd;
+	border: 1px solid #000;
+	z-index: 9001;
+}
+.menuElement {
+	background-color: #ddd;
+	width: 128px;
+}
+
+.menuPicture {
+	background-color: #ddd;
+	float: left;
+	width: 16px;
+	height: 16px;
+}
+
+.menuText {
+	background-color: #ddd;
+	font-size: 16px;
+}
