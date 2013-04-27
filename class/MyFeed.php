@@ -4,30 +4,32 @@ class MyFeed
 	var $myXML;
 	var $titles;
 	var $links;
+	var $descriptions;
 
-	function__construct($rssAtom)
-	{
-		$this->myXML = smplexml_load_file($rssAtom);
-	}
-
-	public function parse()
+	public function parse($rssAtom)
 	{
 		$i = 0;
+		$this->myXML = smplexml_load_file($rssAtom);
 		foreach($this->myXML as $entry){
 		$this->titles[$i] = $entry->title;
 		$this->links[$i] = $entry->link['href'];
+		$this->descriptions[$i] = $entry->summary;
 		$i++;
-		}
 	}
 
-	public function getTitles() 
+	public function getTitles($i) 
 	{
-		return $this->titles;
+		return $this->titles[$i];
 	}
 	
-	public function getLinks()
+	public function getLinks($i)
 	{
-		return $this->links;
+		return $this->links[$i];
+	}
+
+	public function getDesc($i)
+	{
+		return $this->descriptions[$i];
 	}
 
 	public function setTitles($title, $i) 
@@ -39,5 +41,12 @@ class MyFeed
 	{
 		$this->links[$i] = $link;
 	}
+
+	public function setDesc($desc, $i)
+	{
+		$this->descriptions[$i] = $desc;
+	}
+
+
 }
 ?>
