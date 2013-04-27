@@ -61,6 +61,11 @@
 				$_SESSION['x_windowAccount'] = $row[3]. "px";
 				$_SESSION['y_windowAccount'] = $row[4]. "px";
 			}
+			if($row[1] == "rss") {
+				$_SESSION['windowRss'] = $row[2];
+				$_SESSION['x_windowRss'] = $row[3]. "px";
+				$_SESSION['y_windowRss'] = $row[4]. "px";
+			}
 		}
 		mysql_close($con);
 

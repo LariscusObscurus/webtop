@@ -75,8 +75,6 @@
 	// RECEIVE LOGIN DATA
 	if (isset($_POST["login"]))
 	{
-		/* BEGIN OF LDAP */
-		/* UNCOMMENT THIS LINES IF INTERNET CONNECTION IS AVAILABLE */
 		$ldapserver = "ldap.technikum-wien.at";
 		$searchbase = "dc=technikum-wien,dc=at";
 		$loginname = (isset($_POST['username'])) ? $_POST['username'] : NULL;
@@ -121,17 +119,8 @@
        				ldap_close($ds);
        			
 				if (isset($error)) {
-// 					echo "<head>";
-// 					echo "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=iso-8859-1\">";
-// 					echo "<title>FH-Verwaltung</title>";
-// 					echo "</head>";
-// 					echo "<body bgcolor=\"#FFFFFF\" text=\"#000000\" style=\"font-family:Tahoma;font-size:10pt;\">";
-// 					echo "$error";
-// 					$error = 'Anmeldung fehlgeschlagen. Benutzername oder Passwort falsch.';
+					// do nothing
 				} else {
-// 					echo "Login OK <br>";
-// 					echo "Vorname: $vorname <br>";
-// 					echo "Nachname: $nachname <br>";
 					$_SESSION["username"] = $vorname." ".$nachname;
 					$_SESSION["uid"] = 1;
 					mysql_recreate(1);
@@ -142,25 +131,6 @@
 				}
 			}
 		}
-		/* STOP UNCOMMENTING */
-		/* END OF LDAP */
-		/* COMMENT THIS LINES OUT IF INTERNET CONNECTION IS AVAILABLE */
-		/*$username = $_POST["username"];
-		$password = $_POST["password"];
-		$check = authenticateuser($username, $password);
-		
-		if ($check == TRUE)
-		{
-			$_SESSION["username"] = $username;
-			//$_SESSION["play"] = TRUE;
-			header('Location: ./index.php');
-			exit();
-		}
-		else
-		{
-			$error = 'Anmeldung fehlgeschlagen. Benutzername oder Passwort falsch.';
-		}*/
-		/* STOP WITH COMMENTING */
 	}
 	
 ?>

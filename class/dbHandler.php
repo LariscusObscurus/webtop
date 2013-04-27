@@ -17,23 +17,34 @@ class DbHandler
 		mysql_close($this->connection);
 	}
 	
-	function getData($option)
+	function getData($option, $limit = 10)
 	{
+		if ($limit <= 0) {
+			return null;
+		}
 		switch ($option) {
 		case 1:
-			$result = mysql_query("SELECT * FROM rss ORDER BY title ASC;",
+			$result = mysql_query("SELECT * FROM rss 
+				ORDER BY title ASC 
+				LIMIT $limit;",
 				$this->connection);
 			break;
 		case 2:
-			$result = mysql_query("SELECT * FROM rss ORDER BY title DESC;",
+			$result = mysql_query("SELECT * FROM rss 
+				ORDER BY title DESC 
+				LIMIT $limit;",
 				$this->connection);
 			break;
 		case 3:
-			$result = mysql_query("SELECT * FROM rss ORDER BY date ASC;",
+			$result = mysql_query("SELECT * FROM rss 
+				ORDER BY date ASC
+				LIMIT $limit;",
 				$this->connection);
 			break;
 		case 4:
-			$result = mysql_query("SELECT * FROM rss ORDER BY date DESC;",
+			$result = mysql_query("SELECT * FROM rss 
+				ORDER BY date DESC;
+				LIMIT $limit",
 				$this->connection);
 			break;
 		}
@@ -51,7 +62,8 @@ class DbHandler
 		return $result;
 	}
 	
-	function changeEntry($oldTitle, $oldLink, $oldDescription, $newTitle, $newLink, $newDescription)
+	function changeEntry($oldTitle, $oldLink, $oldDescription, 
+		$newTitle, $newLink, $newDescription)
 	{
 		$result = mysql_query("UPDATE rss SET 
 			title = '$newTitle', 
