@@ -484,6 +484,25 @@ function logout () {
 	setCookie("play", "", -1);
 }
 
+function onClickRssSend (event) {
+	noopHandler(event);
+	var content = $("#rssLink").attr("value");
+	
+	if (content && content.length > 0) {
+		var formdata = new FormData();
+		formdata.append("link", content);
+		$.ajax({
+			type: "POST",
+			data: formdata,
+			url: "scripts/delete.php",
+			cache: false,
+			contentType: false,
+			processData: false,
+			success: deletionComplete
+		});
+	}
+}
+
 function setCookie (name, value, exdays) {
 	var exdate = new Date();
 	exdate.setDate(exdate.getDate() + exdays);
