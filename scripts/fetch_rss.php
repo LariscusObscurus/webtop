@@ -14,42 +14,62 @@
 			$descriptions = $feed->getDesc();
 			$count = count($title);
 			$data = $db->getData();
+			$success = true;
 			
-			if ($data && $option == 2) {
-				$i = 0;
-				$count = count($titles);
-				while ($row = mysql_fetch_assoc($data) && $i < $count) {
-					$db->changeEntry(
-						$row['title'],
-						$row['link'],
-						$row['description'],
-						$titles[$i],
-						$links[$i],
-						$descriptions[$i]
-					);
-					$i++;
-				}
-				echo "success";
-			} else if ($data && ($option == 1 || $option == 3)) {
-				for ($i = 0; $i < $count; $i++) {
-					switch ($option) {
-					case 1:
-						$db->addEntry(
+			if ($data) {
+				switch ($option) {
+				case 1:
+					for ($i = 0; $i < $count; $i++) {
+						if (!$db->addEntry(
 							$titles[$i], 
 							$links[$i], 
-							$descriptions[$i]);
-						break;
-					case 3:
-						$db->deleteEntry(
-							$titles[$i], 
-							$links[$i], 
-							$descriptions[$i]);
-						break;
+							$descriptions[$i])) {
+							$success = false;
+							echo "error: couldn't add entry";
+							break;
+						}
 					}
+					break;
+				case 2:
+					$i = 0;
+					$count = count($titles);
+					while ($row = mysql_fetch_assoc($data) && $i < $count) {
+						if (!$db->changeEntry(
+							$row['title'],
+							$row['link'],
+							$row['description'],
+							$titles[$i],
+							$links[$i],
+							$descriptions[$i])) {
+							$success = false;
+							echo "error: couldn't change entry";
+							break;
+						}
+						$i++;
+					}
+					break;
+				case 3:
+					for ($i = 0; $i < $count; $i++) {
+						if (!$db->deleteEntry(
+							$titles[$i], 
+							$links[$i], 
+							$descriptions[$i])) {
+							$success = false;
+							echo "error: couldn't add entry";
+							break;
+						}
+					}
+					break;
+				default:
+					$success = false;
+					echo "error: wrong option $option";
+					break;
 				}
-				echo "success";
+				if ($success) {
+					echo "success";
+				}
 			} else {
-				echo "error: wrong option or no data found";
+				echo "error: no data found";
 			}
 		} else {
 			echo "error: not an atom feed";
