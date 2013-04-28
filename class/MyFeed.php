@@ -70,7 +70,7 @@ class MyFeed
 		$header->addAttribute('xmlns', 'http://www.w3.org/2005/Atom');
 		$header->addChild('title', 'webtop');
 		$header->addChild('updated', $this->date3339());
-		$header->addChild('id','tag:webtop,2013:http://www.lorien.chickenkiller.com/pages/atoms.php');
+		$header->addChild('id','tag:webtop,2013:http://www.lorien.chickenkiller.com/pages/atom.php');
 		while ($row = mysql_fetch_assoc($rssentr)) {
 			$entry = $header->addChild('entry');
 			$entry->addChild('title', $row['title']);
