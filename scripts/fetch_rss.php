@@ -30,7 +30,6 @@
 							echo "\n\ttitle '".$titles[$i]."'";
 							echo "\n\tlink '".$links[$i]."'";
 							echo "\n\tdescription '".$descriptions[$i]."'";
-							break;
 						}
 					}
 					break;
@@ -47,7 +46,6 @@
 							$descriptions[$i])) {
 							$success = false;
 							echo "error: couldn't change entry";
-							break;
 						}
 						$i++;
 					}
@@ -59,8 +57,7 @@
 							$links[$i], 
 							$descriptions[$i])) {
 							$success = false;
-							echo "error: couldn't add entry at index '$i'";
-							break;
+							echo "error: couldn't add entry";
 						}
 					}
 					break;
