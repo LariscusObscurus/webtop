@@ -17,7 +17,7 @@ class DbHandler
 		mysql_close($this->connection);
 	}
 	
-	public function getData(/*$option, */$limit = 10)
+	public function getData($limit = 10)
 	{
 		if ($limit <= 0) {
 			return null;
@@ -26,24 +26,6 @@ class DbHandler
 			ORDER BY date ASC
 			LIMIT $limit;",
 			$this->connection);
-		/*
-		switch ($option) {
-		case 1:
-			$result = mysql_query("SELECT * FROM rss 
-				ORDER BY date ASC
-				LIMIT $limit;",
-				$this->connection);
-			break;
-		case 2:
-			$result = mysql_query("SELECT * FROM rss 
-				ORDER BY date DESC;
-				LIMIT $limit",
-				$this->connection);
-			break;
-		default:
-			return null;
-		}
-		*/
 		if (!$result || mysql_num_rows($result) <= 0) {
 			return null;
 		}
