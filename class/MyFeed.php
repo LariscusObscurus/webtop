@@ -63,18 +63,21 @@ class MyFeed
 			return 0;
 		}
 
-		$newXML = new SimpleXMLElement("<feed></feed>");
-		$newXML->addAttribute('xmlns', 'http://www.w3.org/2005/Atom');
-		$header = $newXML->addChild('title', 'webtop');
+		$header = new SimpleXMLElement("<feed></feed>");
+		$header->addAttribute('xmlns', 'http://www.w3.org/2005/Atom');
+		$header->addChild('title', 'webtop');
 		$header->addChild('updated', $this->date3339());
 		$header->addChild('id','tag:webtop,2013:http://www.lorien.chickenkiller.com/pages/atoms.php');
 		while ($row = mysql_fetch_assoc($rssentr)) {
 			$entry = $header->addChild('entry');
 			$entry->addChild('title', $row['title']);
-			$entry->addChild('link', $row['link']);
+			$link = $entry->addChild('link');
+			$link->addAttribute('href',$row['link']);
 			$entry->addChild('summary', $row['description']);
+			$entry->addChild('updated', $this->date3339());
+			$entry->addChild('id', $row['link']);
 		}
-		echo $newXML->asXML();
+		echo $header->asXML();
 
 	}
 
