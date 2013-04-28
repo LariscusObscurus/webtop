@@ -10,7 +10,7 @@ class MyFeed
 	{
 		$i = 0;
 		$this->myXML = simplexml_load_file($rssAtom);
-		error_log($this->myXML->feed['xmlns'], 0);
+		//error_log($this->myXML->feed['xmlns'], 0);
 		if(!strcmp($this->myXML->feed['xmlns'],
 			'http://www.w3.org/2005/Atom')) 
 		{
