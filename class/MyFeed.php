@@ -5,6 +5,7 @@ class MyFeed
 	private $titles;
 	private $links;
 	private $descriptions;
+	private $times;
 
 	public function parse($rssAtom)
 	{
@@ -20,6 +21,7 @@ class MyFeed
 			$this->titles[$i] = $entry->title;
 			$this->links[$i] = $entry->link['href'];
 			$this->descriptions[$i] = $entry->summary;
+			$this->times[$i] = date('Y-m-d H:i:s', strtotime( $entry->updated));
 			$i++;
 		}
 		return true;
