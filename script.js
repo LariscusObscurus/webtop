@@ -106,7 +106,7 @@ $(document).ready(function (event) {
 		$("#time").html(date.toLocaleTimeString());
 	}, 1000);
 	// load pages/atom.php
-	$("#rssDivContainer").load("pages/atom.php");
+	$("#rssContainer").load("pages/atom.php");
 });
 
 function windowEvents (id) {
