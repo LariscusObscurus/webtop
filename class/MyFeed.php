@@ -7,10 +7,15 @@ class MyFeed
 	private $descriptions;
 	private $times;
 
-	public function parse($rssAtom)
+	public function parse($rssAtom, $mode=0)
 	{
 		$i = 0;
-		$this->myXML = simplexml_load_file($rssAtom);
+		switch($mode) {
+		case 0:
+			$this->myXML = simplexml_load_file($rssAtom);
+		case 1:
+			$this->myXML = simplexml_load_string($rssAtom);
+		}
 		//error_log($this->myXML->feed['xmlns'], 0);
 		if(!strcmp($this->myXML->feed['xmlns'],
 			'http://www.w3.org/2005/Atom')) 
@@ -36,6 +41,11 @@ class MyFeed
 	{
 		return $this->links;
 	}
+	
+	public function getTimes()
+	{
+		return $this->times;
+	}
 
 	public function getDesc()
 	{
@@ -55,6 +65,10 @@ class MyFeed
 	public function setDesc($desc, $i)
 	{
 		$this->descriptions[$i] = $desc;
+	}
+	public function setTimes($desc, $i)
+	{
+		$this->times[$i] = $times;
 	}
 
 	public function createRss()
