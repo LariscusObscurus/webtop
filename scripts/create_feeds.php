@@ -1,6 +1,7 @@
 <?php
+require_once("../class/MyFeed.php");
 $blub = new MyFeed();
-if ($blub->parse($blub->createRss(), 1)) {
+if ($blub->parse($blub->createRss(1), 1)) {
 	$count = count($blub->getTitles());
 	$titles = $blub->getTitles();
 	$links = $blub->getLinks();
