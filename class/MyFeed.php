@@ -73,7 +73,7 @@ class MyFeed
 		$this->times[$i] = $times;
 	}
 
-	public function createRss()
+	public function createRss($mode=0)
 	{
 		require("dbHandler.php");
 		$db = new DbHandler();
@@ -97,7 +97,10 @@ class MyFeed
 			$this->date3339(strtotime($row['date'])));
 			$entry->addChild('id', $row['link']);
 		}
-		echo $header->asXML();
+		if(!$mode) {
+			echo $header->asXML();
+		}
+		return $header->asXML();
 
 	}
 
