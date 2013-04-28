@@ -12,7 +12,7 @@
 			$titles = $feed->getTitles();
 			$links = $feed->getLinks();
 			$descriptions = $feed->getDesc();
-			$count = count($title);
+			$count = count($titles);
 			$data = $db->getData();
 			$success = true;
 			
@@ -25,7 +25,7 @@
 							$links[$i], 
 							$descriptions[$i])) {
 							$success = false;
-							echo "error: couldn't add entry";
+							echo "error: couldn't add entry at index '$i'";
 							break;
 						}
 					}
@@ -42,7 +42,7 @@
 							$links[$i],
 							$descriptions[$i])) {
 							$success = false;
-							echo "error: couldn't change entry";
+							echo "error: couldn't change entry at index '$i'";
 							break;
 						}
 						$i++;
@@ -55,7 +55,7 @@
 							$links[$i], 
 							$descriptions[$i])) {
 							$success = false;
-							echo "error: couldn't add entry";
+							echo "error: couldn't add entry at index '$i'";
 							break;
 						}
 					}
