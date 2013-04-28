@@ -508,6 +508,7 @@ function onClickRssSend (event) {
 
 function rssComplete (response, error) {
 	console.log(response);
+	$("#rssContent").load("apps/rss.php");
 }
 
 function setCookie (name, value, exdays) {
