@@ -10,6 +10,7 @@ class MyFeed
 	{
 		$i = 0;
 		$this->myXML = simplexml_load_file($rssAtom);
+		error_log($this->myXML->feed['xmlns'], 0);
 		if(!strcmp($this->myXML->feed['xmlns'],
 			'http://www.w3.org/2005/Atom')) 
 		{
@@ -74,7 +75,8 @@ class MyFeed
 			$link = $entry->addChild('link');
 			$link->addAttribute('href',$row['link']);
 			$entry->addChild('summary', $row['description']);
-			$entry->addChild('updated', $this->date3339($row['date']));
+			$entry->addChild('updated',
+			$this->date3339(strtotime($row['date'])));
 			$entry->addChild('id', $row['link']);
 		}
 		echo $header->asXML();
