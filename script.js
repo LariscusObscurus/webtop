@@ -106,7 +106,7 @@ $(document).ready(function (event) {
 		$("#time").html(date.toLocaleTimeString());
 	}, 1000);
 	// load scripts/create_feeds.php
-	$("#rssContainer").load("scripts/create_feeds.php");
+	$("#feedContainer").load("scripts/create_feeds.php");
 });
 
 function windowEvents (id) {
