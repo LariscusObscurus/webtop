@@ -1,0 +1,28 @@
+<?php
+$blub = new MyFeed();
+if ($blub->parse($blub->createRss(), 1)) {
+	$count = count($blub->getTitles());
+	$titles = $blub->getTitles();
+	$links = $blub->getLinks();
+	$descriptions = $blub->getDesc();
+	$times = $blub->getTimes();
+	
+	echo "<div id='feedTitle'>";
+	echo "<h1 id='feedTitleText'>Lorien Chickenkiller News</h1>";
+	echo "<h2 id='feedSubtitleText'>Nukular Entertainment</h2>";
+	echo "</div>";
+	
+	for ($i = 0; $i < $count && $i < 10; $i++) {
+		echo "<div class='entry'>";
+		echo "<h3>";
+		echo "<a href='".$links[$i]."'>".$titles[$i]."</a>";
+		echo "<div class='lastUpdated'>".$times[$i]."</div>";
+		echo "</h3>";
+		echo "<div class='feedEntryContent' base='./pages/atom.php'>".$descriptions[$i]."</div>";
+		echo "</div>";
+		echo "<div style='clear: both;'></div>";
+	}
+} else {
+	echo "Error while parsing<br/>";
+}
+?>
