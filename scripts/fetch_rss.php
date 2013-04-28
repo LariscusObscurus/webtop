@@ -14,30 +14,30 @@
 			$times = $feed->getTimes();
 			$descriptions = $feed->getDesc();
 			$count = count($titles);
-			$data = $db->getData();
 			$success = true;
 			
-			if ($data) {
-				switch ($option) {
-				case 1:
-					for ($i = 0; $i < $count; $i++) {
-						if (!$db->addEntry(
-							$titles[$i], 
-							$links[$i], 
-							$descriptions[$i],
-							$times[$i])) {
-							$success = false;
-							echo "error: couldn't add entry at";
-							echo "\n\tindex '$i'";
-							echo "\n\ttitle '".$titles[$i]."'";
-							echo "\n\tlink '".$links[$i]."'";
-							echo "\n\tdescription '".$descriptions[$i]."'\n";
-						}
+			switch ($option) {
+			case 1:
+				for ($i = 0; $i < $count; $i++) {
+					if (!$db->addEntry(
+						$titles[$i], 
+						$links[$i], 
+						$descriptions[$i],
+						$times[$i])) {
+						$success = false;
+						echo "error: couldn't add entry at";
+						echo "\n\tindex '$i'";
+						echo "\n\ttitle '".$titles[$i]."'";
+						echo "\n\tlink '".$links[$i]."'";
+						echo "\n\tdescription '".$descriptions[$i]."'\n";
 					}
-					break;
-				case 2:
-					$i = 0;
-					$count = count($titles);
+				}
+				break;
+			case 2:
+				$i = 0;
+				$count = count($titles);
+				$data = $db->getData();
+				if (!$data) {
 					while ($row = mysql_fetch_assoc($data) && $i < $count) {
 						if (!$db->changeEntry(
 							$row['title'],
@@ -52,28 +52,29 @@
 						}
 						$i++;
 					}
-					break;
-				case 3:
-					for ($i = 0; $i < $count; $i++) {
-						if (!$db->deleteEntry(
-							$titles[$i], 
-							$links[$i], 
-							$descriptions[$i])) {
-							$success = false;
-							echo "error: couldn't add entry\n";
-						}
-					}
-					break;
-				default:
+				} else {
 					$success = false;
-					echo "error: wrong option $option";
-					break;
+					echo "error: no data found\n";
 				}
-				if ($success) {
-					echo "success";
+				break;
+			case 3:
+				for ($i = 0; $i < $count; $i++) {
+					if (!$db->deleteEntry(
+						$titles[$i], 
+						$links[$i], 
+						$descriptions[$i])) {
+						$success = false;
+						echo "error: couldn't add entry\n";
+					}
 				}
-			} else {
-				echo "error: no data found";
+				break;
+			default:
+				$success = false;
+				echo "error: wrong option $option";
+				break;
+			}
+			if ($success) {
+				echo "success";
 			}
 		} else {
 			echo "error: not an atom feed";

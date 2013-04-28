@@ -1,5 +1,5 @@
 <form action="" method="post" enctype="multipart/form-data">
-	<label for="rssLink">Datei: </label>
+	<label for="rssLink">Link: </label>
 	<input id="rssLink" type="text" name="LinkRSS" onclick="onClickRssText(event)"/>
 	<input id="rssSend" type="button" name="SendRSS" value="SendRSS" onclick="onClickRssSend(event)"/><br/>
 	<div id="feedContainer">

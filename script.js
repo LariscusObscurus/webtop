@@ -105,8 +105,6 @@ $(document).ready(function (event) {
 		var date = new Date();
 		$("#time").html(date.toLocaleTimeString());
 	}, 1000);
-	// load scripts/create_feeds.php
-	$("#feedContainer").load("scripts/create_feeds.php");
 });
 
 function windowEvents (id) {
