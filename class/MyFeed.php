@@ -74,7 +74,7 @@ class MyFeed
 			$link = $entry->addChild('link');
 			$link->addAttribute('href',$row['link']);
 			$entry->addChild('summary', $row['description']);
-			$entry->addChild('updated', $this->date3339());
+			$entry->addChild('updated', $this->date3339($row['date']));
 			$entry->addChild('id', $row['link']);
 		}
 		echo $header->asXML();
