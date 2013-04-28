@@ -57,8 +57,8 @@ class DbHandler
 	
 	public function deleteEntry($title, $link, $description)
 	{
-		$result = mysql_query("DELETE FROM rss WHERE 
-			title = '$title' AND 
+		$result = mysql_query("DELETE FROM rss 
+			WHERE title = '$title' AND 
 			link = '$link' AND 
 			description = '$description';",
 			$this->description);
