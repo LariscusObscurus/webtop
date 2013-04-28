@@ -25,7 +25,11 @@
 							$links[$i], 
 							$descriptions[$i])) {
 							$success = false;
-							echo "error: couldn't add entry at index '$i'";
+							echo "error: couldn't add entry at";
+							echo "\n\tindex '$i'";
+							echo "\n\ttitle '".$titles[$i]."'";
+							echo "\n\tlink '".$links[$i]."'";
+							echo "\n\tdescription '".$descriptions[$i]."'";
 							break;
 						}
 					}
@@ -42,7 +46,7 @@
 							$links[$i],
 							$descriptions[$i])) {
 							$success = false;
-							echo "error: couldn't change entry at index '$i'";
+							echo "error: couldn't change entry";
 							break;
 						}
 						$i++;

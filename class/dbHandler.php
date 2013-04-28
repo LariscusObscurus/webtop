@@ -34,6 +34,15 @@ class DbHandler
 	
 	public function addEntry($title, $link, $description)
 	{
+		$result = mysql_query("SELECT link FROM rss WHERE link = '$link';", 
+			$this->connection);
+		if (mysql_num_rows($result) > 0) {
+			$result = mysql_query("DELETE FROM rss WHERE link = '$link';",
+				$this->connection);
+			if (!$result) {
+				return false;
+			}
+		}
 		$result = mysql_query("INSERT INTO rss (title, link, description, date) 
 			VALUES ('$title', '$link', '$description', NOW())", 
 			$this->connection);
