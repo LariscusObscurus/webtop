@@ -34,6 +34,9 @@ class DbHandler
 	
 	public function addEntry($title, $link, $description)
 	{
+		$title = mysql_real_escape_string($title);
+		$link = mysql_real_escape_string($link);
+		$description = mysql_real_escape_string($description);
 		$result = mysql_query("SELECT link FROM rss WHERE link = '$link';", 
 			$this->connection);
 		if (mysql_num_rows($result) > 0) {
@@ -52,6 +55,9 @@ class DbHandler
 	public function changeEntry($oldTitle, $oldLink, $oldDescription, 
 		$newTitle, $newLink, $newDescription)
 	{
+		$title = mysql_real_escape_string($title);
+		$link = mysql_real_escape_string($link);
+		$description = mysql_real_escape_string($description);
 		$result = mysql_query("UPDATE rss SET 
 			title = '$newTitle', 
 			link = '$newLink', 
@@ -66,6 +72,9 @@ class DbHandler
 	
 	public function deleteEntry($title, $link, $description)
 	{
+		$title = mysql_real_escape_string($title);
+		$link = mysql_real_escape_string($link);
+		$description = mysql_real_escape_string($description);
 		$result = mysql_query("DELETE FROM rss 
 			WHERE title = '$title' AND 
 			link = '$link' AND 
