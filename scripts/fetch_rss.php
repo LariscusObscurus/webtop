@@ -11,6 +11,7 @@
 		if ($feed->parse($link)) {
 			$titles = $feed->getTitles();
 			$links = $feed->getLinks();
+			$times = $feed->getTimes();
 			$descriptions = $feed->getDesc();
 			$count = count($titles);
 			$data = $db->getData();
@@ -23,7 +24,8 @@
 						if (!$db->addEntry(
 							$titles[$i], 
 							$links[$i], 
-							$descriptions[$i])) {
+							$descriptions[$i],
+							$times[$i])) {
 							$success = false;
 							echo "error: couldn't add entry at";
 							echo "\n\tindex '$i'";
@@ -43,7 +45,8 @@
 							$row['description'],
 							$titles[$i],
 							$links[$i],
-							$descriptions[$i])) {
+							$descriptions[$i],
+							$times[$i])) {
 							$success = false;
 							echo "error: couldn't change entry\n";
 						}

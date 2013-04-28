@@ -23,7 +23,7 @@ class DbHandler
 			return null;
 		}
 		$result = mysql_query("SELECT * FROM rss 
-			ORDER BY date ASC
+			ORDER BY date DESC
 			LIMIT $limit;",
 			$this->connection);
 		if (!$result || mysql_num_rows($result) <= 0) {
@@ -32,7 +32,7 @@ class DbHandler
 		return $result;
 	}
 	
-	public function addEntry($title, $link, $description)
+	public function addEntry($title, $link, $description, $time)
 	{
 		$title = mysql_real_escape_string($title);
 		$link = mysql_real_escape_string($link);
@@ -47,13 +47,13 @@ class DbHandler
 			}
 		}
 		$result = mysql_query("INSERT INTO rss (title, link, description, date) 
-			VALUES ('$title', '$link', '$description', NOW())", 
+			VALUES ('$title', '$link', '$description', '$time')", 
 			$this->connection);
 		return $result;
 	}
 	
 	public function changeEntry($oldTitle, $oldLink, $oldDescription, 
-		$newTitle, $newLink, $newDescription)
+		$newTitle, $newLink, $newDescription, $time)
 	{
 		$title = mysql_real_escape_string($title);
 		$link = mysql_real_escape_string($link);
@@ -62,7 +62,7 @@ class DbHandler
 			title = '$newTitle', 
 			link = '$newLink', 
 			description = '$newDescription', 
-			date = NOW() 
+			date = '$time' 
 		WHERE title = '$oldTitle' AND 
 			link = '$oldLink' AND 
 			description = '$oldDescription';", 
