@@ -13,8 +13,10 @@ class MyFeed
 		switch($mode) {
 		case 0:
 			$this->myXML = simplexml_load_file($rssAtom);
+			break;
 		case 1:
 			$this->myXML = simplexml_load_string($rssAtom);
+			break;
 		}
 		//error_log($this->myXML->feed['xmlns'], 0);
 		if(!strcmp($this->myXML->feed['xmlns'],
@@ -89,7 +91,7 @@ class MyFeed
 			$entry = $header->addChild('entry');
 			$entry->addChild('title', $row['title']);
 			$link = $entry->addChild('link');
-			$link->addAttribute('href',$row['link']);
+			$link->addAttribute('href', $row['link']);
 			$entry->addChild('summary', $row['description']);
 			$entry->addChild('updated',
 			$this->date3339(strtotime($row['date'])));
