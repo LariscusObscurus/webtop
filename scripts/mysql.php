@@ -5,18 +5,18 @@
 		$salt = substr($username,0,2);
 		$cryp_pw = crypt($pw, $salt);
 
-		$con = mysql_connect ("localhost", "apache", "fingolfin");
+		$con = mysqli_connect ("localhost", "apache", "fingolfin");
 		if(!$con) {
-			die('MySQL Fehler: '. mysql_error());
+			die('MySQL Fehler: '. mysqli_error());
 		}
-		mysql_select_db("webtop", $con);
+		mysqli_select_db($con, "webtop");
 
-		$result = mysql_query("SELECT * FROM user WHERE username='$username' AND pwd='$cryp_pw'", $con);
+		$result = mysqli_query($con, "SELECT * FROM user WHERE username='$username' AND pwd='$cryp_pw'");
 		if(!$result) {
-			die('MySQL Fehler: '. mysql_error());
+			die('MySQL Fehler: '. mysqli_error());
 		}
 
-		if ($row = mysql_fetch_row($result)) {
+		if ($row = mysqli_fetch_row($result)) {
 			$_SESSION['uid'] = $row[0];
 			if($row[3] && $row[4]) {
 				$_SESSION['username'] = $row[3]." ".$row[4];
@@ -26,25 +26,25 @@
 			}
 			return 0;
 		} else {
-			mysql_close($con);
+			mysqli_close($con);
 			return -1;
 		}
 	}
 	
 	function mysql_recreate($uid) 
 	{
-		$con = mysql_connect ("localhost", "apache", "fingolfin");
+		$con = mysqli_connect ("localhost", "apache", "fingolfin");
 		if(!$con) {
-			die('MySQL Fehler: '. mysql_error());
+			die('MySQL Fehler: '. mysqli_error());
 		}
-		mysql_select_db("webtop", $con);
+		mysqli_select_db($con, "webtop");
 
-		$result = mysql_query("SELECT * FROM applikation WHERE uid='$uid'", $con);
+		$result = mysqli_query($con ,"SELECT * FROM applikation WHERE uid='$uid'");
 		if(!$result) {
-			die('MySQL Fehler: '. mysql_error());
+			die('MySQL Fehler: '. mysqli_error());
 		}
 		
-		while ($row = mysql_fetch_row($result)) {
+		while ($row = mysqli_fetch_row($result)) {
 			if($row[1] == "photo") {
 				$_SESSION['windowPhoto'] = $row[2];
 				$_SESSION['x_windowPhoto'] = $row[3]. "px";
@@ -67,7 +67,7 @@
 				$_SESSION['y_windowRss'] = $row[4]. "px";
 			}
 		}
-		mysql_close($con);
+		mysqli_close($con);
 
 	}
 
@@ -76,38 +76,38 @@
 		$salt = substr($username,0,2);
 		$cryp_pw = crypt($pw, $salt);
 
-		$con = mysql_connect ('localhost', 'apache', 'fingolfin');
+		$con = mysqli_connect ('localhost', 'apache', 'fingolfin');
 		if(!$con) {
-			die('MySQL Fehler: '. mysql_error());
+			die('MySQL Fehler: '. mysqli_error());
 		}
-		mysql_select_db('webtop', $con);
-		$result = mysql_query("INSERT INTO user (username, vorname, nachname, email, pwd)
-		VALUES ('$username','$name','$surname','$email','$cryp_pw')", $con);
+		mysqli_select_db($con, "webtop");
+		$result = mysqli_query($con ,"INSERT INTO user (username, vorname, nachname, email, pwd)
+		VALUES ('$username','$name','$surname','$email','$cryp_pw')");
 		if(!$result) {
-				die('MySQL Fehler: '. mysql_error());
+				die('MySQL Fehler: '. mysqli_error());
 			}
-		mysql_close($con);
+		mysqli_close($con);
 		return $result;
 
 	}
 
 	function mysql_save($app, $open, $uid, $x, $y) 
 	{
-		$con = mysql_connect ("localhost", "apache", "fingolfin");
+		$con = mysqli_connect ("localhost", "apache", "fingolfin");
 		if(!$con) {
-			die('MySQL Fehler: '. mysql_error());
+			die('MySQL Fehler: '. mysqli_error());
 		}
-		mysql_select_db("webtop", $con);
+		mysqli_select_db($con, "webtop");
 
-		$result = mysql_query("SELECT status FROM applikation WHERE uid='$uid' AND app_name='$app'", $con);
+		$result = mysqli_query($con, "SELECT status FROM applikation WHERE uid='$uid' AND app_name='$app'");
 
-		if (!($row = mysql_fetch_row($result))) {
-			mysql_query("INSERT INTO applikation (app_name, status, pos_x, pos_y, uid) 
-			VALUES ('$app','$open','$x','$y', '$uid')", $con);
+		if (!($row = mysqli_fetch_row($result))) {
+			mysqli_query($con ,"INSERT INTO applikation (app_name, status, pos_x, pos_y, uid) 
+			VALUES ('$app','$open','$x','$y', '$uid')");
 		} else {
-			mysql_query("UPDATE applikation SET pos_x='$x', pos_y='$y', status='$open' WHERE uid='$uid' AND app_name='$app'", $con);
+			mysqli_query($con ,"UPDATE applikation SET pos_x='$x', pos_y='$y', status='$open' WHERE uid='$uid' AND app_name='$app'");
 		}
 
-		mysql_close($con);
+		mysqli_close($con);
 	}
 ?>

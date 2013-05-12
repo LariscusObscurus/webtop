@@ -89,13 +89,13 @@ class MyFeed
 		$header->addChild('id','tag:webtop,2013:http://www.lorien.chickenkiller.com/pages/atom.php');
 		while ($row = mysql_fetch_assoc($rssentr)) {
 			$entry = $header->addChild('entry');
-			$entry->addChild('title', $row['title']);
+			$entry->addChild('title', htmlspecialchars($row['title'], ENT_XML1));
 			$link = $entry->addChild('link');
-			$link->addAttribute('href', $row['link']);
+			$link->addAttribute('href', htmlspecialchars($row['link'], ENT_XML1));
 			$entry->addChild('summary', $row['description']);
 			$entry->addChild('updated',
 			$this->date3339(strtotime($row['date'])));
-			$entry->addChild('id', $row['link']);
+			$entry->addChild('id', htmlspecialchars($row['link'], ENT_XML1));
 		}
 		if(!$mode) {
 			echo $header->asXML();

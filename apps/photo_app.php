@@ -24,7 +24,9 @@
 		$total = count($pic);
 		for ($x = 0; $x < $total; $x++) {
 			if (strpos($pic[$x], "_thumb") !== false) {
-				$ext = end(explode('.', $pic[$x]));
+				/*temp wegen pass by reference strict php standard*/
+				$temp = explode('.', $pic[$x]);
+				$ext = end($temp);
 				$content = explode('_', $pic[$x]);
 				$name = "";
 				for ($i = 0; $i < count($content) - 1; $i++) {
