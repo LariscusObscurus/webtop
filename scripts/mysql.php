@@ -7,7 +7,7 @@
 
 		$con = mysqli_connect ("localhost", "apache", "fingolfin");
 		if(!$con) {
-			die('MySQL Fehler: '. mysqli_error());
+			die('MySQL Fehler: '. mysqli_error($con));
 		}
 		mysqli_select_db($con, "webtop");
 
@@ -16,7 +16,7 @@
 			mysqli_real_escape_string($con, $cryp_pw));
 		$result = mysqli_query($con, $query);
 		if(!$result) {
-			die('MySQL Fehler: '. mysqli_error());
+			die('MySQL Fehler: '. mysqli_error($con));
 		}
 
 		if ($row = mysqli_fetch_row($result)) {
@@ -38,7 +38,7 @@
 	{
 		$con = mysqli_connect ("localhost", "apache", "fingolfin");
 		if(!$con) {
-			die('MySQL Fehler: '. mysqli_error());
+			die('MySQL Fehler: '. mysqli_error($con));
 		}
 		mysqli_select_db($con, "webtop");
 
@@ -46,7 +46,7 @@
 			mysqli_real_escape_string($con, $uid));
 		$result = mysqli_query($con ,$query);
 		if(!$result) {
-			die('MySQL Fehler: '. mysqli_error());
+			die('MySQL Fehler: '. mysqli_error($con));
 		}
 		
 		while ($row = mysqli_fetch_row($result)) {
@@ -83,7 +83,7 @@
 
 		$con = mysqli_connect ('localhost', 'apache', 'fingolfin');
 		if(!$con) {
-			die('MySQL Fehler: '. mysqli_error());
+			die('MySQL Fehler: '. mysqli_error($con));
 		}
 		mysqli_select_db($con, "webtop");
 		$query = sprintf("INSERT INTO user (username, vorname, nachname, email, pwd)
@@ -95,7 +95,7 @@
 			mysqli_real_escape_string($con, $cryp_pw));
 		$result = mysqli_query($con , $query);
 		if(!$result) {
-				die('MySQL Fehler: '. mysqli_error());
+				die('MySQL Fehler: '. mysqli_error($con));
 			}
 		mysqli_close($con);
 		return $result;
@@ -106,7 +106,7 @@
 	{
 		$con = mysqli_connect ("localhost", "apache", "fingolfin");
 		if(!$con) {
-			die('MySQL Fehler: '. mysqli_error());
+			die('MySQL Fehler: '. mysqli_error($con));
 		}
 		mysqli_select_db($con, "webtop");
 
