@@ -12,7 +12,7 @@
 		mysql_save("account", $_SESSION["windowAccount"], $_SESSION["uid"], $_SESSION["x_windowAccount"], $_SESSION["y_windowAccount"]);
 	}
 	if(isset($_SESSION["windowRss"])) {
-		mysql_save("account", $_SESSION["windowRss"], $_SESSION["uid"], $_SESSION["x_windowRss"], $_SESSION["y_windowRss"]);
+		mysql_save("rss", $_SESSION["windowRss"], $_SESSION["uid"], $_SESSION["x_windowRss"], $_SESSION["y_windowRss"]);
 	}
 
 	session_destroy();

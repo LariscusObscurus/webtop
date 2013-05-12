@@ -11,7 +11,10 @@
 		}
 		mysqli_select_db($con, "webtop");
 
-		$result = mysqli_query($con, "SELECT * FROM user WHERE username='$username' AND pwd='$cryp_pw'");
+		$query = sprintf("SELECT * FROM user WHERE username='%s' AND pwd='%s'",
+			mysqli_real_escape_string($con, $username),
+			mysqli_real_escape_string($con, $cryp_pw));
+		$result = mysqli_query($con, $query);
 		if(!$result) {
 			die('MySQL Fehler: '. mysqli_error());
 		}
@@ -39,7 +42,9 @@
 		}
 		mysqli_select_db($con, "webtop");
 
-		$result = mysqli_query($con ,"SELECT * FROM applikation WHERE uid='$uid'");
+		$query = sprintf("SELECT * FROM applikation WHERE uid='%s'",
+			mysqli_real_escape_string($con, $uid));
+		$result = mysqli_query($con ,$query);
 		if(!$result) {
 			die('MySQL Fehler: '. mysqli_error());
 		}
@@ -81,8 +86,14 @@
 			die('MySQL Fehler: '. mysqli_error());
 		}
 		mysqli_select_db($con, "webtop");
-		$result = mysqli_query($con ,"INSERT INTO user (username, vorname, nachname, email, pwd)
-		VALUES ('$username','$name','$surname','$email','$cryp_pw')");
+		$query = sprintf("INSERT INTO user (username, vorname, nachname, email, pwd)
+		VALUES ('%s','%s','%s','%s','%s')",
+			mysqli_real_escape_string($con, $username),
+			mysqli_real_escape_string($con, $name),
+			mysqli_real_escape_string($con, $surname),
+			mysqli_real_escape_string($con, $email),
+			mysqli_real_escape_string($con, $cryp_pw));
+		$result = mysqli_query($con , $query);
 		if(!$result) {
 				die('MySQL Fehler: '. mysqli_error());
 			}
@@ -99,13 +110,32 @@
 		}
 		mysqli_select_db($con, "webtop");
 
-		$result = mysqli_query($con, "SELECT status FROM applikation WHERE uid='$uid' AND app_name='$app'");
+		$query = sprintf("SELECT status FROM applikation WHERE
+		uid='%s' AND app_name='%s'",
+			mysqli_real_escape_string($con, $uid),
+			mysqli_real_escape_string($con, $app));
+		$result = mysqli_query($con, $query);
 
 		if (!($row = mysqli_fetch_row($result))) {
-			mysqli_query($con ,"INSERT INTO applikation (app_name, status, pos_x, pos_y, uid) 
-			VALUES ('$app','$open','$x','$y', '$uid')");
+			$query = sprintf("INSERT INTO applikation (app_name, status, pos_x, pos_y, uid) 
+			VALUES ('%s','%s','%s','%s', '%s')",
+			mysqli_real_escape_string($con, $app),
+			mysqli_real_escape_string($con, $open),
+			mysqli_real_escape_string($con, $x),
+			mysqli_real_escape_string($con, $y),
+			mysqli_real_escape_string($con, $uid));
+
+			mysqli_query($con , $query);
 		} else {
-			mysqli_query($con ,"UPDATE applikation SET pos_x='$x', pos_y='$y', status='$open' WHERE uid='$uid' AND app_name='$app'");
+			$query = sprintf("UPDATE applikation SET pos_x='%s', 
+			pos_y='%s', status='%s' WHERE uid='%s' AND app_name='%s'",
+			mysqli_real_escape_string($con, $x),
+			mysqli_real_escape_string($con, $y),
+			mysqli_real_escape_string($con, $open),
+			mysqli_real_escape_string($con, $uid),
+			mysqli_real_escape_string($con, $app));
+
+			mysqli_query($con ,$query);
 		}
 
 		mysqli_close($con);
